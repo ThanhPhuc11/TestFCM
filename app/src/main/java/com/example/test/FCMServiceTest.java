@@ -81,29 +81,29 @@ public class FCMServiceTest extends FirebaseMessagingService {
         notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
 
-    private void showNoti(String title, String body){
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        String NOTIFICATION_CHANNEL_ID = "com.example.test";
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Noti",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("CC");
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-        notificationBuilder.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setWhen(System.currentTimeMillis())
-                .setContentTitle(title)
-                .setContentText(body)
-                .setContentInfo("InfoCC");
-
-        notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
-
-    }
+//    private void showNoti(String title, String body){
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        String NOTIFICATION_CHANNEL_ID = "com.example.test";
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Noti",
+//                    NotificationManager.IMPORTANCE_DEFAULT);
+//            notificationChannel.setDescription("CC");
+//            notificationChannel.enableLights(true);
+//            notificationChannel.setLightColor(Color.RED);
+//            notificationManager.createNotificationChannel(notificationChannel);
+//        }
+//
+//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+//        notificationBuilder.setAutoCancel(true)
+//                .setDefaults(Notification.DEFAULT_ALL)
+//                .setWhen(System.currentTimeMillis())
+//                .setContentTitle(title)
+//                .setContentText(body)
+//                .setContentInfo("InfoCC");
+//
+//        notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
+//
+//    }
 
     @Override
     public void onNewToken(String s) {
