@@ -37,19 +37,34 @@ public class FCMServiceTest extends FirebaseMessagingService {
     }
 
     private void hienThiThongBao(String body,String title) {
-        Intent intent=new Intent(this,MainActivity.class);
+        String channelId = "jp";
+        Intent intent=new Intent(this,Main4Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         Uri sound= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder builder=new NotificationCompat.Builder(this)
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(sound)
                 .setContentIntent(pendingIntent);
+
+
+
         NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        manager.notify(0,builder.build());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    getResources().getString(R.string.app_name),
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setShowBadge(false);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+
+        manager.notify((int) System.currentTimeMillis(),builder.build());
     }
     private void hienThiThongBao(String body) {
         hienThiThongBao(body,"google");
